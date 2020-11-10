@@ -1,15 +1,4 @@
-const inquirer = require(inquirer);
-
-function action() {
-    inquirer.prompt(
-        {
-            name: "action",
-            type: "list",
-            message: "Would you like to [ADD], [REMOVE], [UPDATE] or [VIEW] employee information?",
-            choices: ["ADD", "REMOVE", "UPDATE", "VIEW"],
-        }
-    );
-}
+const inquirer = require("inquirer");
 
 function view() {
     inquirer.prompt(
@@ -102,7 +91,14 @@ function db_init() {
 };
 
 function init() {
-    action().then(function (answer) {
+    inquirer.prompt(
+        {
+            name: "action",
+            type: "list",
+            message: "Would you like to [ADD], [REMOVE], [UPDATE] or [VIEW] employee information?",
+            choices: ["ADD", "REMOVE", "UPDATE", "VIEW"],
+        }
+    ).then(function (answer) {
         // based on their answer, either call the bid or the post functions
         if (answer.action === "ADD") {
             add();

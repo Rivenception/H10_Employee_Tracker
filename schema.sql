@@ -1,5 +1,8 @@
 DROP DATABASE IF EXISTS teamtracker_DB;
+
 CREATE DATABASE teamtracker_DB;
+
+USE teamtracker_DB;
 
 CREATE TABLE department(
   id INT NOT NULL AUTO_INCREMENT,
@@ -13,7 +16,7 @@ CREATE TABLE role(
   salary INT,
   department_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (department_id) REFERENCES department(id),
+  FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 CREATE TABLE employee(
