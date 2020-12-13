@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
   port: 3306,
   user: "root",
   password: process.env.MYSQLPASS,
-  database: "teamtracker_DB"
+  database: "employee_DB"
 });
 
 connection.connect(function(err) {
