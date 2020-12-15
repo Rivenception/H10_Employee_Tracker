@@ -49,8 +49,8 @@ function init() {
         "Exit",
       ],
     })
-    .then(function (answer) {
-      switch (answer.action) {
+    .then(function (res) {
+      switch (res.action) {
         case "View All Departments":
           return viewDept();
         case "View All Roles":
@@ -132,7 +132,7 @@ function viewEmployeesByDept() {
 
 function viewEmployeesByMgr() {
   connection.query(
-    "SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id ORDER BY title",
+    "SELECT * FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id ORDER BY manager_id DESC",
     function (err, res) {
       if (err) throw err;
       console.table(res);
@@ -142,19 +142,48 @@ function viewEmployeesByMgr() {
 }
 
 function addEmployee() {
-  inquirer.prompt(
-    {
-      name: "firstName",
-      type: "input",
-      message: "What employee first name?",
-    },
-    {
-      name: "lastName",
-      type: "input",
-      message: "What employee last name?",
-    }
-  );
-}
+    connection.query("SELECT * FROM role", function(err, res) {
+        if (err) throw err;
+        inquirer.prompt([
+            {
+                name: "firstName",
+                type: "input",
+                message: "What employee first name?",
+            },
+            {
+                name: "lastName",
+                type: "input",
+                message: "What employee last name?",
+            },
+            {
+                type: "list",
+                name: "role",
+                choices: () => {
+                    var choices = [];
+                    for(var i=0;i<res.length;i++){
+                        choices.push(res[i].title);
+                    }
+                    return choices;
+                }
+            }
+        ])
+        .then(function(answer){
+            for(var i=0;i<res.length;i++){
+                if(answer.role === res[i].title)
+                answer.role = res[i].id;
+            }
+            connection.query(
+                "INSERT INTO employee SET ?",
+                {
+                    first_name: answer.firstName,
+                    last_name: answer.lastName,
+                    role_id: answer.role
+                },
+                init()
+            )},
+        )
+    })
+};
 
 function addRole() {
   inquirer.prompt(
@@ -184,7 +213,7 @@ function removeEmployee() {
     name: "whichRemove",
     type: "list",
     message: "What would you like to remove?",
-    choices: ["Remove Employee", "Remove Department", "Remove Role"],
+    choices: () => {},
   });
 }
 
@@ -193,7 +222,7 @@ function removeRole() {
     name: "whichRemove",
     type: "list",
     message: "What would you like to remove?",
-    choices: ["Remove Employee", "Remove Department", "Remove Role"],
+    choices: () => {},
   });
 }
 
@@ -202,7 +231,7 @@ function removeDept() {
     name: "whichRemove",
     type: "list",
     message: "What would you like to remove?",
-    choices: ["Remove Employee", "Remove Department", "Remove Role"],
+    choices: () => {},
   });
 }
 
@@ -211,11 +240,7 @@ function updateEmployee() {
     name: "whichUpdate",
     type: "list",
     message: "What employee information would you like to update?",
-    choices: [
-      "Update Employee Role",
-      "Update Department",
-      "Update Employee Manager",
-    ],
+    choices: () => {},
   });
 }
 
@@ -224,11 +249,7 @@ function updateRole() {
     name: "whichUpdate",
     type: "list",
     message: "What employee information would you like to update?",
-    choices: [
-      "Update Employee Role",
-      "Update Department",
-      "Update Employee Manager",
-    ],
+    choices: () => {},
   });
 }
 
@@ -237,12 +258,8 @@ function updateDept() {
     name: "whichUpdate",
     type: "list",
     message: "What employee information would you like to update?",
-    choices: [
-      "Update Employee Role",
-      "Update Department",
-      "Update Employee Manager",
-    ],
-  });
+    choices: () => {},
+  })
 }
 
 init();
