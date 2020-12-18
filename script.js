@@ -387,16 +387,10 @@ function updateRole() {
                         if(answerRole.whichRole === (resRole[i].title))
                         answerRole.whichRole = resRole[i].id;
                     }
-                    console.log(answerEmployee)
-                    console.log(answerRole)
+                    console.log(answerEmployee.whichEmployee)
+                    console.log(answerRole.whichRole)
                     connection.query(
-                        "UPDATE employee SET ? WHERE id = ?"[
-                            {
-                                role_id: answerRole.whichRole
-                            },
-                            {
-                                id: answerEmployee.whichEmployee
-                            }],
+                        "UPDATE employee SET role_id = ? WHERE id = ?",[answerRole.whichRole,answerEmployee.whichEmployee]
                     )},
                     init()
                 )
