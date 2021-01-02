@@ -36,6 +36,10 @@ N/A
 
 N/A
 
+## Tutorial
+
+You can find a video tutorial on how to use the application [here](https://drive.google.com/file/d/1pGYA55IIVLP6u2esUub1T3XL1xwcBSIF/view?usp=sharing)
+
 ## Questions
 
 For any questions you can contact me at ricky.mingione@gmail.com
