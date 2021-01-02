@@ -40,5 +40,5 @@ N/A
 
 For any questions you can contact me at ricky.mingione@gmail.com
 
-[![Github](https://www.google.com/imgres?imgurl=https%3A%2F%2Fbanner2.cleanpng.com%2F20180824%2Fjtl%2Fkisspng-computer-icons-logo-portable-network-graphics-clip-icons-for-free-iconza-circle-social-5b7fe46b0bac53.1999041115351082030478.jpg&imgrefurl=https%3A%2F%2Fwww.cleanpng.com%2Fpng-computer-icons-logo-portable-network-graphics-clip-6362014%2F&tbnid=PxgWbaNXiTwCHM&vet=12ahUKEwi1lYqCk_7tAhXRcTABHchbAjAQMygEegUIARCxAQ..i&docid=omhncf02B6o-hM&w=900&h=520&q=github%20image&hl=en&ved=2ahUKEwi1lYqCk_7tAhXRcTABHchbAjAQMygEegUIARCxAQ)](https://github.com/Rivenception)
+[![Github](./readme-assets/github.png)](https://github.com/Rivenception)
 
